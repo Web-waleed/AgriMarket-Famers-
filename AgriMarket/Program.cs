@@ -1,3 +1,8 @@
+using AgriMarket.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 namespace AgriMarket
 {
     public class Program
@@ -8,7 +13,12 @@ namespace AgriMarket
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("constr"));
+            });
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

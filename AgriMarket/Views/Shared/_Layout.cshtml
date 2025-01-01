@@ -1,49 +1,347 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
+    <!-- Basic -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AgriMarket</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/AgriMarket.styles.css" asp-append-version="true" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>@ViewData["Title"]</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/responsive.css" rel="stylesheet" />
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="hero_area ">
+        <!-- header section strats -->
+        <header class="header_section">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AgriMarket</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <nav class="navbar navbar-expand-lg custom_nav-container">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/logo.png" alt="">
+                    </a>
+                    <div class="" id="">
+                        <div class="User_option">
+                            <form class="form-inline my-2  mb-3 mb-lg-0">
+                                <input type="search" placeholder="Search">
+                                <button class="btn   my-sm-0 nav_search-btn" type="submit"></button>
+                            </form>
+                        </div>
+
+                        <div class="custom_menu-btn">
+                            <button onclick="openNav()">
+                                <span class="s-1">
+
+                                </span>
+                                <span class="s-2">
+
+                                </span>
+                                <span class="s-3">
+
+                                </span>
+                            </button>
+                        </div>
+                        <div id="myNav" class="overlay">
+                            <div class="overlay-content">
+                                <a href="index.html">Home</a>
+                                <a href="about.html">About</a>
+                                <a href="contact.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+        <!-- slider section -->
+        <section class="slider_section">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-5 offset-md-1">
+                                    <div class="detail-box">
+                                        <div class="number">
+                                            <h5>
+                                                01
+                                            </h5>
+                                        </div>
+                                        <h1>
+                                            Drool <br>
+                                            <span>
+                                                Pet And Animal
+                                            </span>
+                                        </h1>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="" class="btn-1">
+                                                Read More
+                                            </a>
+                                            <a href="" class="btn-2">
+                                                Contact Us
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="img-box">
+                                        <img src="images/slider-img.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-5 offset-md-1">
+                                    <div class="detail-box">
+                                        <div class="number">
+                                            <h5>
+                                                02
+                                            </h5>
+                                        </div>
+                                        <h1>
+                                            Drool <br>
+                                            <span>
+                                                Pet And Animal
+                                            </span>
+                                        </h1>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="" class="btn-1">
+                                                Read More
+                                            </a>
+                                            <a href="" class="btn-2">
+                                                Contact Us
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="img-box">
+                                        <img src="images/slider-img.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-5 offset-md-1">
+                                    <div class="detail-box">
+                                        <div class="number">
+                                            <h5>
+                                                03
+                                            </h5>
+                                        </div>
+                                        <h1>
+                                            Drool <br>
+                                            <span>
+                                                Pet And Animal
+                                            </span>
+                                        </h1>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="" class="btn-1">
+                                                Read More
+                                            </a>
+                                            <a href="" class="btn-2">
+                                                Contact Us
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="img-box">
+                                        <img src="images/slider-img.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-5 offset-md-1">
+                                    <div class="detail-box">
+                                        <div class="number">
+                                            <h5>
+                                                04
+                                            </h5>
+                                        </div>
+                                        <h1>
+                                            Drool <br>
+                                            <span>
+                                                Pet And Animal
+                                            </span>
+                                        </h1>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="" class="btn-1">
+                                                Read More
+                                            </a>
+                                            <a href="" class="btn-2">
+                                                Contact Us
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="img-box">
+                                        <img src="images/slider-img.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+        </section>
+        <!-- end slider section -->
     </div>
 
-    <footer class="border-top footer text-muted">
+  <div>
+      @RenderBody()
+  </div>
+    <!-- info section -->
+    <section class="info_section ">
         <div class="container">
-            &copy; 2025 - AgriMarket - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="info_contact">
+                        <h5>
+                            CONTACT INFO
+                        </h5>
+                        <div>
+                            <img src="images/call.png" alt="" />
+                            <p>
+                                +01 1234567890
+                            </p>
+                        </div>
+                        <div>
+                            <img src="images/mail.png" alt="" />
+                            <p>
+                                demo@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info_time">
+                        <h5>
+                            Opening Hours Shop
+                        </h5>
+                        <div>
+                            <p>
+                                Monday to friday
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                07:00 am to 04:00 pm
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="info_social">
+                        <h5>
+                            social media
+                        </h5>
+                        <div class="social_container">
+                            <div>
+                                <a href="">
+                                    <img src="images/fb.png" alt="" />
+                                </a>
+                            </div>
+                            <div>
+                                <a href="">
+                                    <img src="images/twitter.png" alt="" />
+                                </a>
+                            </div>
+                            <div>
+                                <a href="">
+                                    <img src="images/linkedin.png" alt="" />
+                                </a>
+                            </div>
+                            <div>
+                                <a href="">
+                                    <img src="images/instagram.png" alt="" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info_form pl-lg-4">
+                        <h5>
+                            Newsletter
+                        </h5>
+                        <form action="">
+                            <input type="text" placeholder="Enter Your Email" />
+                            <button type="submit">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </section>
+
+    <!-- end info_section -->
+    <!-- footer section -->
+    <section class="container-fluid footer_section ">
+        <p>
+            &copy; 2019 All Rights Reserved. Design by
+            <a href="https://html.design/">Free Html Templates</a>
+        </p>
+    </section>
+    <!-- end  footer section -->
+
+
+    <script type="text/javascript" src="~/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.js"></script>
+    <script>
+        function openNav() {
+          document.getElementById("myNav").classList.toggle("menu_width")
+          document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style")
+        }
+    </script>
+
 </body>
+
 </html>
