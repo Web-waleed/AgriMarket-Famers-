@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BestSeller>
+ <!-- Feature section -->
+<section class="animal_section layout_padding">
+    <div class="container">
+        <div class="animal_container">
+            @foreach (var item in Model)
+            {
+                 <div class="box @item.ProductType">
+                <div class="img-box">
+                    <img src="@item.Productimg" alt="@item.ProductName">
+                </div>
+                <div class="detail-box">
+                    <h5>
+                        @item.ProductName
+                    </h5>
+                    <p>
+                        @item.ProductDescription
+                    </p>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- end Feature section -->

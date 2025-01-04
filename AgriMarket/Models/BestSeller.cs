@@ -8,7 +8,7 @@ namespace AgriMarket.Models
         public String ProductURL {  get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
-        public decimal ProductPrice { get; set; }
+        public String ProductType { get; set; }
         public String? Productimg { get; set; }
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
