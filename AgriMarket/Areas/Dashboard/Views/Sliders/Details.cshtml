@@ -1,0 +1,42 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Slider</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SliderHeader)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SliderHeader)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SliderDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SliderDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sliderimg)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sliderimg)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Button)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Button)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SliderID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

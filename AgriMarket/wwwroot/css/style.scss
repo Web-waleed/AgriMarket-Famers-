@@ -716,59 +716,58 @@ a:focus {
 // food section
 
 .food_section {
-  background: linear-gradient(to bottom, $btnColor 60%, transparent 60%);
+    background: linear-gradient(to bottom, $btnColor 60%, transparent 60%);
 
-  .heading_container {
-    align-items: center;
-    text-align: center;
-    color: $white;
-  }
-
-  .food_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-
-    .box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      margin: 45px 20px 0 20px;
-
-
-      .img-box {
-        img {
-          max-width: 100%;
-        }
-      }
-
-      .detail-box {
-        margin-top: 15px;
-
-        h6 {
-          color: $primary1;
-          text-transform: uppercase;
-        }
-
-        h3 {
-          font-weight: bold;
-          color: $primary1;
-
-          span {
-            color: $btnColor;
-          }
-        }
-
-        a {
-          @include hero_btn($btnColor, $primary1, 8px, 45px, 0);
-          margin-top: 15px;
-        }
-      }
-
+    .heading_container {
+        align-items: center;
+        text-align: center;
+        color: $white;
     }
 
-  }
+    .food_container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 45px 20px 0 20px;
+
+
+            .img-box {
+                img {
+                   
+                    max-width: 100%;
+                }
+            }
+
+            .detail-box {
+                margin-top: 15px;
+
+                h6 {
+                    color: $primary1;
+                    text-transform: uppercase;
+                }
+
+                h3 {
+                    font-weight: bold;
+                    color: $primary1;
+
+                    span {
+                        color: $btnColor;
+                    }
+                }
+
+                a {
+                    @include hero_btn($btnColor, $primary1, 8px, 45px, 0);
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
 }
 
 // end food section

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Slider>
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        line-height: 2.5;
+    }
+</style>
+<h1>Index</h1>
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table id="my-table" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SliderHeader)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Sliderimg)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SliderHeader)
+                </td>
+                
+                <td>
+                    <img src="@item.Sliderimg" alt="@item.SliderDescription" class="img-fluid" style="width:100px;height:100px" />
+                </td>
+
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" method="post" asp-route-id="@item.SliderID">Edit</a> |
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.SliderID">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.SliderID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
