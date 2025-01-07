@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Slider>
+<!-- slider section -->
+<section class="slider_section">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            @foreach (var item in Model)
+            {
+                <div class="carousel-item @item.Active">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-5 offset-md-1">
+                                <div class="detail-box">
+                                    <div class="number">
+                                        <h5>
+                                            @item.SliderNum
+                                        </h5>
+                                    </div>
+                                    <h1>
+                                        @item.SliderHeader <br>
+                                        
+                                    </h1>
+                                    <p>
+                                        @item.SliderDescription
+                                        </p>
+                                    <div class="btn-box">
+                                        <a href="" class="btn-1">
+                                            @item.Button
+                                        </a>
+                                        <a href="" class="btn-2">
+                                            Contact Us
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="img-box">
+                                    <img src="@item.Sliderimg" alt="@item.SliderDescription">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+
+</section>
+<!-- end slider section -->

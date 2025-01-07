@@ -22,4 +22,13 @@
     <Folder Include="Areas\Dashboard\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Feedback\css\.DS_Store" />
+    <None Include="wwwroot\Feedback\css\images\.DS_Store" />
+    <None Include="wwwroot\Feedback\fonts\.DS_Store" />
+    <None Include="wwwroot\Feedback\images\.DS_Store" />
+    <None Include="wwwroot\Feedback\js\.DS_Store" />
+    <None Include="wwwroot\Feedback\sass\.DS_Store" />
+  </ItemGroup>
+
 </Project>

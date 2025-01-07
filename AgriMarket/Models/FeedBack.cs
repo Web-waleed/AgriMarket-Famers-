@@ -16,5 +16,6 @@ namespace AgriMarket.Models
 
         [DataType(DataType.DateTime)]
         public DateTime SubmissionDate { get; set; }
+        public String Active { get; set; }
     }
 }

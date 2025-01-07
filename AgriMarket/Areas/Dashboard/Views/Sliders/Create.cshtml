@@ -2,7 +2,12 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<style>
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        line-height: 2.5;
+    }
+</style>
+<h1>Create</h1>
 <h1>Create</h1>
 
 <div class="row">
@@ -33,6 +38,11 @@
                 <label asp-for="Button" class="control-label"></label>
                 <input asp-for="Button" class="form-control" />
                 <span asp-validation-for="Button" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Active" class="control-label"></label>
+                <input asp-for="Active" class="form-control" />
+                <span asp-validation-for="Active" class="text-danger"></span>
             </div>
 
             <div class="form-group">

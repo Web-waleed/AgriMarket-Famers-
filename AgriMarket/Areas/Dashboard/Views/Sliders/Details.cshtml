@@ -2,7 +2,12 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<style>
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        line-height: 2.5;
+    }
+</style>
+<h1>Details</h1>
 <h1>Details</h1>
 
 <div>
@@ -32,6 +37,18 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Button)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SliderNum)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SliderNum)
         </dd>
 
     </dl>

@@ -16,7 +16,7 @@
             <div class="carousel-inner">
                 @foreach (var item in Model)
                 {
-                     <div class="carousel-item active">
+                    <div class="carousel-item @item.Active">
                     <div class="box">
                         <div class="img-box">
                             <img src="images/client.png" alt="">
@@ -27,12 +27,14 @@
                             </h4>
                             <p>
                                 @item.Review
-                           </p>
+                            </p>
                             <img src="images/quote.png" alt="">
                         </div>
                     </div>
                 </div>
                 }
+                
+                
             </div>
             <div class="carousel_btn-box">
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
