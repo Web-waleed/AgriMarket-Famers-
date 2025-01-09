@@ -1,5 +1,6 @@
 ﻿using AgriMarket.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Models.ViewComponents 
 {
@@ -10,9 +11,15 @@ namespace AgriMarket.Models.ViewComponents
         {
             this.context = context;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(context.products.ToList());
+           
+            var acceptedProducts = await context.products
+                .Where(p => p.Status == FarmerProductStatus.Accepted)
+                .ToListAsync();
+
+            return View(acceptedProducts);
         }
+        
     }
 }

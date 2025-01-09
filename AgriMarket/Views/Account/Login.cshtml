@@ -1,7 +1,6 @@
-﻿
-@model RegisterViewModel
+﻿@model LoginViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Login";
     Layout = null;
 }
 
@@ -38,27 +37,22 @@
     <!-- Theme css -->
     <link rel="stylesheet" id="change-link" type="text/css" href="~/assets/css/style.css">
 </head>
-<!-- signup page start -->
+
+<!-- signin page start -->
 <section class="login-hero-section section-b-space">
     <div class="container">
         <div class="row">
             <div class="col-xl-5 col-lg-6 col-md-10 m-auto">
                 <div class="login-data">
-                    <form asp-action="Register" asp-controller="Account" method="post" class="auth-form">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <h2>Sign up</h2>
+                    <form class="auth-form" method="post" asp-action="Login" asp-controller="Account">
+                        <h2>Sign in</h2>
                         <h5>
                             or
-                            <a asp-action="Login" asp-controller="Account"><span class="theme-color">login to your account</span></a>
+                            <a asp-action="Register" asp-controller="Account"><span class="theme-color">create an a account</span></a>
                         </h5>
-                        <div class="form-input">
+                        <div class="form-input" >
                             <input asp-for="Email" class="form-control" placeholder="Enter your Email">
                             <span asp-validation-for="Email"></span>
-                            <i class="ri-user-3-line"></i>
-                        </div>
-                        <div class="form-input">
-                            <input asp-for="PhoneNumber" class="form-control" placeholder="Enter your number">
-                            <span asp-validation-for="PhoneNumber"></span>
                             <i class="ri-phone-line"></i>
                         </div>
                         <div class="form-input">
@@ -66,15 +60,10 @@
                             <span asp-validation-for="Password"></span>
                             <i class="ri-lock-password-line"></i>
                         </div>
-                        <div class="form-input">
-                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Enter your password">
-                            <span asp-validation-for="ConfirmPassword"></span>
-                            <i class="ri-lock-password-line"></i>
-                        </div>
                         <button type="submit" class="btn theme-btn submit-btn w-100 rounded-2">CONTINUE</button>
                         
                         <p class="fw-normal content-color">
-                          
+                            
                             <span class="fw-semibold">
                                 <a asp-action="Index" asp-controller="Home">Go Back to Home</a>
                             </span>
@@ -85,4 +74,4 @@
         </div>
     </div>
 </section>
-<!-- signup page end -->
+<!-- signin page end -->

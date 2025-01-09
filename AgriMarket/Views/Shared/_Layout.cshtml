@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+@inject SignInManager<IdentityUser> signInManager
+<!DOCTYPE html>
 <html>
 <head>
     <!-- Basic -->
@@ -31,14 +33,13 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" asp-action="index" asp-controller="Home">
                         <img src="~/images/agrimarketlogo.png" alt="">
                     </a>
                     <div class="" id="">
                         <div class="User_option">
                             <form class="form-inline my-2  mb-3 mb-lg-0">
-                                <input type="search" placeholder="Search">
-                                <button class="btn   my-sm-0 nav_search-btn" type="submit"></button>
+                                @User.Identity!.Name
                             </form>
                         </div>
 
@@ -57,9 +58,18 @@
                         </div>
                         <div id="myNav" class="overlay">
                             <div class="overlay-content">
-                                <a href="index.html">Home</a>
-                                <a href="about.html">About</a>
-                                <a href="contact.html">Contact Us</a>
+                                <a asp-action="index" asp-controller="Home">Home</a>
+                                @if (signInManager.IsSignedIn(User))
+                                    {
+                                       
+                                            <a  asp-action="Logout" asp-controller="Account">SignOut | @User.Identity!.Name
+                                            </a>
+                                    }
+                                else{
+                                    <a asp-action="Login" asp-controller="Account">Login</a>
+                                }
+                                
+                                
                             </div>
                         </div>
                     </div>

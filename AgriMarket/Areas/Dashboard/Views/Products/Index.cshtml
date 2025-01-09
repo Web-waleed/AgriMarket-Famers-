@@ -2,55 +2,118 @@
 @{
     ViewData["Title"] = "Index";
 }
-<style>
-    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-        line-height: 2.5;
-    }
-</style>
+@{
+    var pendingProducts = ViewBag.PendingProducts as List<Product>;
+    var acceptedProducts = ViewBag.AcceptedProducts as List<Product>;
+
+    var rejectedProducts = ViewBag.RejectedProducts as List<Product>;
+
+}
 <h1>Index</h1>
 
-<h1>Index</h1>
+<h2>Pending Products</h2>
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
-<table id="my-table" class="table">
+<table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImg)
-            </th>
-
-            <th></th>
+            <th>Product Name</th>
+            <th>Farmer</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var product in pendingProducts )
         {
             <tr>
+                <td>@product.ProductName</td>
+                <td>@product.FarmerName</td>
+                <td>@product.ProductDescription</td>
+                <td>@product.ProductPrice</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
+                    @if (!string.IsNullOrEmpty(product.ProductImg))
+                    {
+                        <img src="@product.ProductImg" alt="Product Image" style="max-width: 100px;" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Products" asp-route-id="@product.ProductId" class="btn btn-primary">Details</a>
+                    <a asp-action="Accept" asp-controller="Products" asp-route-id="@product.ProductId" class="btn btn-success" onclick="return confirm('Are you sure you want to accept this organization?');">Accept</a>
+                    <a asp-action="Reject" asp-controller="Products" asp-route-id="@product.ProductId" class="btn btn-danger" onclick="return confirm('Are you sure you want to reject this organization?');">Reject</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Farmer</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in acceptedProducts)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.FarmerName</td>
+                <td>@product.ProductDescription</td>
+                <td>@product.ProductPrice</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.ProductImg))
+                    {
+                        <img src="@product.ProductImg" alt="Product Image" style="max-width: 100px;" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Products" asp-route-id="@product.ProductId" class="btn btn-primary">Details</a>
+                    <a asp-action="Pend" asp-controller="Products" asp-route-id="@product.ProductId" class="btn btn-secondary" onclick="return confirm('Are you sure you want to reject this organization?');">Pending</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Farmer</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in rejectedProducts)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.FarmerName</td>
+                <td>@product.ProductDescription</td>
+                <td>@product.ProductPrice</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.ProductImg))
+                    {
+                        <img src="@product.ProductImg" alt="Product Image" style="max-width: 100px;" />
+                    }
                 </td>
                 
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductPrice)
+                    <a asp-action="Details" asp-controller="Products" asp-route-id="@product.ProductId" class="btn btn-primary">Details</a>
+                    <a asp-action="Pend" asp-controller="Products" asp-route-id="@product.ProductId" class="btn btn-secondary" onclick="return confirm('Are you sure you want to reject this organization?');">Pending</a>
                 </td>
-                <td>
-                    <img src="@item.ProductImg" alt="@item.ProductDescription" class="img-fluid" style="width:100px;height:100px" />
-                </td>
-
-                <td>
-                    <a class="btn btn-warning" asp-action="Edit" method="post" asp-route-id="@item.ProductId">Edit</a> |
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                </td>
+                
             </tr>
         }
     </tbody>

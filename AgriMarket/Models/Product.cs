@@ -7,16 +7,18 @@ namespace AgriMarket.Models
     {
         [Key]
         public int ProductId { get; set; }
-
+        public string FarmerName { get; set; }
+        public string FarmerEmail { get; set; }
+        public string FarmerNumber { get; set; }
         [Required(ErrorMessage = "Product name is required.")]
         [StringLength(100, ErrorMessage = "Product name cannot exceed 100 characters.")]
-        public string ProductName { get; set; } 
+        public string ProductName { get; set; }
 
         [StringLength(255, ErrorMessage = "Image URL cannot exceed 255 characters.")]
-        public string? ProductImg { get; set; } 
+        public string? ProductImg { get; set; }
 
         [NotMapped]
-        public IFormFile? ImageFile { get; set; } 
+        public IFormFile? ImageFile { get; set; }
 
         [Required(ErrorMessage = "Product description is required.")]
         [StringLength(500, ErrorMessage = "Product description cannot exceed 500 characters.")]
@@ -25,7 +27,13 @@ namespace AgriMarket.Models
         [Required(ErrorMessage = "Product price is required.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Product price must be greater than 0.")]
         public decimal ProductPrice { get; set; }
-        public int SalesCount { get; set; }
-
+        // Product status (Pending, Accepted, Rejected)
+        public FarmerProductStatus Status { get; set; } = FarmerProductStatus.Pending;
+    }
+    public enum FarmerProductStatus
+    {
+        Pending,
+        Accepted,
+        Rejected
     }
 }

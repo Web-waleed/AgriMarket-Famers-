@@ -13,5 +13,6 @@ namespace AgriMarket.Data
         public DbSet<Product> products { get; set; }
         public DbSet<Slider> sliders { get; set; }
         
+        
     }
 }

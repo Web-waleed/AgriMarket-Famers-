@@ -4,6 +4,7 @@ using AgriMarket.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgriMarket.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250109065116_hnhgf")]
+    partial class hnhgf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BestSeller", (string)null);
+                    b.ToTable("BestSeller");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.ContactIUS", b =>
@@ -88,7 +91,35 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("contactIUs", (string)null);
+                    b.ToTable("contactIUs");
+                });
+
+            modelBuilder.Entity("AgriMarket.Models.Farmer", b =>
+                {
+                    b.Property<int>("FarmerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FarmerId"));
+
+                    b.Property<string>("FarmerEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FarmerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FarmerNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FarmerStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("FarmerId");
+
+                    b.ToTable("farmers");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.FeedBack", b =>
@@ -118,7 +149,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("feedBacks", (string)null);
+                    b.ToTable("feedBacks");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.Product", b =>
@@ -129,17 +160,8 @@ namespace AgriMarket.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<string>("FarmerEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FarmerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FarmerNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("FarmerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -163,7 +185,9 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("products", (string)null);
+                    b.HasIndex("FarmerId");
+
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.Slider", b =>
@@ -201,7 +225,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("SliderID");
 
-                    b.ToTable("sliders", (string)null);
+                    b.ToTable("sliders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -400,6 +424,17 @@ namespace AgriMarket.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("AgriMarket.Models.Product", b =>
+                {
+                    b.HasOne("AgriMarket.Models.Farmer", "Farmer")
+                        .WithMany()
+                        .HasForeignKey("FarmerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Farmer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

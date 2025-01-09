@@ -4,6 +4,7 @@ using AgriMarket.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgriMarket.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250109082525_bvcd")]
+    partial class bvcd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BestSeller", (string)null);
+                    b.ToTable("BestSeller");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.ContactIUS", b =>
@@ -88,7 +91,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("contactIUs", (string)null);
+                    b.ToTable("contactIUs");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.FeedBack", b =>
@@ -118,7 +121,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("feedBacks", (string)null);
+                    b.ToTable("feedBacks");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.Product", b =>
@@ -163,7 +166,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("ProductId");
 
-                    b.ToTable("products", (string)null);
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("AgriMarket.Models.Slider", b =>
@@ -201,7 +204,7 @@ namespace AgriMarket.Migrations
 
                     b.HasKey("SliderID");
 
-                    b.ToTable("sliders", (string)null);
+                    b.ToTable("sliders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
