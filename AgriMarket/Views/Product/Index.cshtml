@@ -3,60 +3,80 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center my-4">Product List</h1>
 
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table id="my-table" class="table">
+
+<!-- Custom CSS for additional styling -->
+<style>
+    /* Custom table styling */
+    #my-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        #my-table th, #my-table td {
+            padding: 12px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #my-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #my-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        #my-table tr:hover {
+            background-color: #e9ecef;
+        }
+
+    /* Button styling */
+    .btn {
+        margin: 2px;
+    }
+
+    /* Image styling */
+    .img-fluid {
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<table id="my-table" class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th> 
-            <th>
-                @Html.DisplayNameFor(model => model.FarmerName)
-            </th> 
-            <th>
-                @Html.DisplayNameFor(model => model.FarmerNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductImg)
-            </th>
-
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+            <th>@Html.DisplayNameFor(model => model.FarmerName)</th>
+            <th>@Html.DisplayNameFor(model => model.FarmerNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.ProductImg)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <th>
-                    @Html.DisplayNameFor(model => model.FarmerName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FarmerNumber)
-                </th>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductPrice)
-                </td>
+                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                <td>@Html.DisplayFor(modelItem => item.FarmerName)</td>
+                <td>@Html.DisplayFor(modelItem => item.FarmerNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
                 <td>
                     <img src="@item.ProductImg" alt="@item.ProductDescription" class="img-fluid" style="width:100px;height:100px" />
                 </td>
-
                 <td>
-                    <a class="btn btn-warning" asp-action="Edit" method="post" asp-route-id="@item.ProductId">Edit</a> |
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.ProductId">Details</a> |
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-

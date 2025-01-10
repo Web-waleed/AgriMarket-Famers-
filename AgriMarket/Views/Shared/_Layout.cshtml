@@ -13,8 +13,14 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="shortcut icon" href="~/images/minlogo.png" type="x-icon" title="Atom">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>@ViewData["Title"]-AgriMarket</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JavaScript (optional, for interactive components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
@@ -25,6 +31,17 @@
     <link href="~/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="~/css/responsive.css" rel="stylesheet" />
+    <style>
+        .hero_area {
+        background-image: url(../images/senior-man-working-field-with-chest-vegetables.jpg);
+            
+        }
+
+        .navbar-brand img {
+            width: 75px;
+            height: 25px;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,6 +59,8 @@
                                 @User.Identity!.Name
                             </form>
                         </div>
+  
+                        
 
                         <div class="custom_menu-btn">
                             <button onclick="openNav()">
@@ -59,11 +78,12 @@
                         <div id="myNav" class="overlay">
                             <div class="overlay-content">
                                 <a asp-action="index" asp-controller="Home">Home</a>
+                                
                                 @if (signInManager.IsSignedIn(User))
                                     {
-                                       
-                                            <a  asp-action="Logout" asp-controller="Account">SignOut | @User.Identity!.Name
-                                            </a>
+                                        <a asp-action="Index" asp-controller="Home" asp-area="Dashboard"><i class="fa-solid fa-user-tie"> Admin</i></a>
+                                        <a asp-action="RolesList" asp-controller="Account"><i class="fa-solid fa-screwdriver-wrench"> Role List</i></a>
+                                        <a asp-action="Logout" asp-controller="Account">SignOut | @User.Identity!.Name</a>
                                     }
                                 else{
                                     <a asp-action="Login" asp-controller="Account">Login</a>
@@ -95,13 +115,13 @@
                         <div>
                             <img src="images/call.png" alt="" />
                             <p>
-                                +01 1234567890
+                                +972790172586
                             </p>
                         </div>
                         <div>
                             <img src="images/mail.png" alt="" />
                             <p>
-                                demo@gmail.com
+                                WaleedKhalidShurafa@outlook.sa
                             </p>
                         </div>
                     </div>
@@ -109,16 +129,16 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="info_time">
                         <h5>
-                            Opening Hours Shop
+                            
                         </h5>
                         <div>
                             <p>
-                                Monday to friday
+                               
                             </p>
                         </div>
                         <div>
                             <p>
-                                07:00 am to 04:00 pm
+                               
                             </p>
                         </div>
                     </div>
@@ -131,25 +151,21 @@
                         </h5>
                         <div class="social_container">
                             <div>
-                                <a href="">
-                                    <img src="images/fb.png" alt="" />
+                                <a href="https://web.facebook.com/waleed.alshurafa.3">
+                                    <img  src="~/images/fb.png" alt="" />
                                 </a>
                             </div>
                             <div>
-                                <a href="">
-                                    <img src="images/twitter.png" alt="" />
+                                <a href="https://x.com/Waleed_jo_pl">
+                                    <img src="~/images/twitter.png" alt="" />
                                 </a>
                             </div>
                             <div>
-                                <a href="">
-                                    <img src="images/linkedin.png" alt="" />
+                                <a href="https://www.linkedin.com/in/waleed-alshurafa-83038b217/">
+                                    <img src="~/images/linkedin.png" alt="" />
                                 </a>
                             </div>
-                            <div>
-                                <a href="">
-                                    <img src="images/instagram.png" alt="" />
-                                </a>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
