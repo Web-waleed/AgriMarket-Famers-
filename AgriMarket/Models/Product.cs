@@ -7,12 +7,11 @@ namespace AgriMarket.Models
     {
         [Key]
         public int ProductId { get; set; }
-        public string FarmerName { get; set; }
-        public string FarmerEmail { get; set; }
-        public string FarmerNumber { get; set; }
+
         [Required(ErrorMessage = "Product name is required.")]
         [StringLength(100, ErrorMessage = "Product name cannot exceed 100 characters.")]
         public string ProductName { get; set; }
+
 
         [StringLength(255, ErrorMessage = "Image URL cannot exceed 255 characters.")]
         public string? ProductImg { get; set; }
@@ -29,6 +28,10 @@ namespace AgriMarket.Models
         public decimal ProductPrice { get; set; }
         // Product status (Pending, Accepted, Rejected)
         public FarmerProductStatus Status { get; set; } = FarmerProductStatus.Pending;
+        // Foreign key to associate the product with a farmer (as a string)
+        [ForeignKey("FarmerId")]
+        public int FarmerId { get; set; }
+        public Farmer? Farmer { get; set; } // Navigation property to the Farmer
     }
     public enum FarmerProductStatus
     {

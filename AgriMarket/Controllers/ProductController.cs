@@ -6,66 +6,157 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Controllers
 {
+    [Authorize(Roles = "Farmer,Admin")]
     public class ProductController : Controller
     {
         private AppDbContext _context;
         public ProductController(AppDbContext context)
         {
-            _context= context;
+            _context = context;
         }
         public IActionResult Index()
         {
-            var products=_context.products
-                .Where(x => x.Status == FarmerProductStatus.Accepted).ToList();
-            
+            string farmerEmail = User.Identity.Name;
+            var farmer = _context.Farmers.FirstOrDefault(f => f.FarmerEmail == farmerEmail);
+            var products = _context.Products
+                .Where(p => p.FarmerId == farmer.FarmerId && p.Status == FarmerProductStatus.Accepted)
+                .ToList();
+
             return View(products);
         }
+        [AllowAnonymous] 
         public IActionResult Details(int id)
         {
-            var products = _context.products.Find(id);
+            
+            var product = _context.Products
+                .Include(p => p.Farmer) 
+                .FirstOrDefault(p => p.ProductId == id);
 
-            if (products == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            if (products.Status == FarmerProductStatus.Accepted)
-            {
-                return View(products);
-            }
-            else if (products.Status == FarmerProductStatus.Pending)
-            {
-                return RedirectToAction("PendingMessage");
-            }
-            else if (products.Status == FarmerProductStatus.Rejected)
-            {
-                return RedirectToAction("RejectedMessage");
-            }
-
-            return View(products);
+            return View(product); 
         }
-       
+
         public IActionResult Create()
         {
 
             return View();
         }
 
-        // POST: Organizations/Create
+
         [HttpPost]
         public async Task<IActionResult> CreateAsync(Product product)
         {
             if (ModelState.IsValid)
             {
+                
+                string farmerEmail = User.Identity.Name;
+
+                
+                var farmer = _context.Farmers.FirstOrDefault(f => f.FarmerEmail == farmerEmail);
+                if (farmer == null)
+                {
+                    return Unauthorized("Farmer not found for the logged-in user.");
+                }
+
+               
+                product.FarmerId = farmer.FarmerId;
+
                 if (product.ImageFile != null && product.ImageFile.Length > 0)
                 {
                     try
                     {
-
                         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-                        var fileName = Path.GetFileName(product.ImageFile.FileName);
+
+                      
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+
+                        
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(product.ImageFile.FileName);
                         var filePath = Path.Combine(uploadsFolder, fileName);
 
+                        
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await product.ImageFile.CopyToAsync(fileStream);
+                        }
+
+                        
+                        product.ProductImg = $"/images/{fileName}";
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        Console.WriteLine($"Error uploading file: {ex.Message}");
+                        ModelState.AddModelError(string.Empty, "An error occurred while uploading the file. Please try again.");
+                        return View(product);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("ImageFile", "Please upload a valid image file.");
+                    return View(product);
+                }
+
+                
+                _context.Add(product);
+                await _context.SaveChangesAsync();
+
+                TempData["PendingAlert"] = true;
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(product);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var organization = await _context.Products.FindAsync(id);
+            if (organization == null)
+            {
+                return NotFound();
+            }
+            return View(organization);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Product product)
+        {
+            if (id != product.ProductId)
+            {
+                return NotFound();
+            }
+
+
+            string farmerEmail = User.Identity.Name;
+
+            
+            var farmer = _context.Farmers.FirstOrDefault(f => f.FarmerEmail == farmerEmail);
+            if (farmer == null)
+            {
+                return Unauthorized("Farmer not found for the logged-in user.");
+            }
+
+            
+            product.FarmerId = farmer.FarmerId;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    
+                    if (product.ImageFile != null && product.ImageFile.Length > 0)
+                    {
+                        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(product.ImageFile.FileName);
+                        var filePath = Path.Combine(uploadsFolder, fileName);
 
                         if (!Directory.Exists(uploadsFolder))
                         {
@@ -77,61 +168,9 @@ namespace AgriMarket.Controllers
                             await product.ImageFile.CopyToAsync(fileStream);
                         }
 
-
                         product.ProductImg = $"/images/{fileName}";
-
-
-                        _context.Add(product);
-                        await _context.SaveChangesAsync();
-
-
-                        TempData["PendingAlert"] = true;
-
-
-                        return RedirectToAction(nameof(Index));
                     }
-                    catch (Exception ex)
-                    {
 
-                        ModelState.AddModelError(string.Empty, "An error occurred while uploading the file.");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("ImageFile", "Please upload a valid image file.");
-                }
-            }
-
-
-            return View(product);
-        }
-
-
-        // GET: Organizations/Edit/5
-        public async Task<IActionResult> Edit(int id)
-        {
-            var organization = await _context.products.FindAsync(id);
-            if (organization == null)
-            {
-                return NotFound();
-            }
-            return View(organization);
-        }
-
-        // POST: Organizations/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Product product)
-        {
-            if (id != product.ProductId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -148,13 +187,14 @@ namespace AgriMarket.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             return View(product);
         }
 
         // GET: Organizations/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var product = await _context.products.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
                 return NotFound();
@@ -167,10 +207,10 @@ namespace AgriMarket.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.products.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
             if (product != null)
             {
-                _context.products.Remove(product);
+                _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
@@ -178,8 +218,7 @@ namespace AgriMarket.Controllers
 
         private bool ProductExists(int id)
         {
-            return _context.products.Any(e => e.ProductId == id);
+            return _context.Products.Any(e => e.ProductId == id);
         }
     }
 }
-  

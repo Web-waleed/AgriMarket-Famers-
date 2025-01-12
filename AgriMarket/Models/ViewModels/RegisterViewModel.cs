@@ -8,7 +8,7 @@ namespace AgriMarket.Models.ViewModels
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Display(Name = "Email Address")]
         public string Email { get; set; }
-
+        
         [Required(ErrorMessage = "Phone number is required.")]
         [Phone(ErrorMessage = "Invalid phone number.")]
         [StringLength(15, MinimumLength = 10, ErrorMessage = "Phone number must be between 10 and 15 characters.")]

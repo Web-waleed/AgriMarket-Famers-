@@ -10,9 +10,12 @@ namespace AgriMarket.Data
         public DbSet<BestSeller> BestSeller { get; set; }
         public DbSet<ContactIUS> contactIUs { get; set; }
         public DbSet<FeedBack> feedBacks { get; set; }
-        public DbSet<Product> products { get; set; }
+        public DbSet<Product> Products { get; set; }
+       public DbSet<Farmer>? Farmers { get; set; }
+       
         public DbSet<Slider> sliders { get; set; }
         
         
     }
 }
+

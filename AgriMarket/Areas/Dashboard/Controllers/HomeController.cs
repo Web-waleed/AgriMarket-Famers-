@@ -51,7 +51,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                     products.ProductImg = $"/images/{fileName}";
 
 
-                    _Context.products.Add(products);
+                    _Context.Products.Add(products);
                     await _Context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));

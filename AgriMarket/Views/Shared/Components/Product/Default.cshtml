@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Product>
 <!-- Product section -->
 <style>
- 
+
     .food_section .food_container {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -18,7 +18,7 @@
 <section class="food_section layout_padding">
     <div class="container">
         <div class="heading_container">
-            <img src="images/heading-img.png" alt="">
+            <img src="~/images/orange_4389074.png" alt="">
             <h2>
                 Our products for farmers
             </h2>
@@ -29,28 +29,28 @@
         <div class="food_container">
             @foreach (var item in Model)
             {
-                 <div class="box">
-                <div class="img-box">
-                    <img style="height:100px" src="@item.ProductImg" alt="@item.ProductDescription">
-                </div>
-                <div class="detail-box">
-                    <h6>
-                        @item.ProductName
-                    </h6>
-                    <h3>
-                        <span>$</span>@item.ProductPrice
-                    </h3>
-                    <a href="">
-                        Buy Now
-                    </a>
+                <div class="box">
+                    <div class="img-box">
+                        <img style="height:100px" src="@item.ProductImg" alt="@item.ProductDescription">
+                    </div>
+                    <div class="detail-box">
+                        <h6>
+                            @item.ProductName
+                        </h6>
+                        <h3>
+                            <span>$</span>@item.ProductPrice
+                        </h3>
+                        <a href="">
+                            Buy Now
+                        </a>
                         <a asp-action="Details" asp-controller="Product" asp-route-id="@item.ProductId">
-                       Details
-                    </a>
+                            Details
+                        </a>
+                    </div>
                 </div>
-            </div>
             }
-           
-           
+
+
         </div>
     </div>
 </section>

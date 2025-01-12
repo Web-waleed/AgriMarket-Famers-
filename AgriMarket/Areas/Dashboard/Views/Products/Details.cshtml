@@ -1,0 +1,82 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<!-- Custom CSS for additional styling -->
+<style>
+    .details-container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-header {
+        color: #343a40;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .details-list dt {
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .details-list dd {
+        margin-bottom: 15px;
+        color: #6c757d;
+    }
+
+    .action-links a {
+        margin-right: 10px;
+        color: #fff;
+        background-color: #007bff;
+        padding: 8px 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .action-links a:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="container mt-5">
+    <div class="details-container">
+        <h1 class="details-header">Product Details</h1>
+
+        <div>
+            <h4 class="mb-4">Product Information</h4>
+            <hr />
+            <dl class="row details-list">
+                <dt class="col-sm-3">Farmer Name</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Farmer.FarmerName)</dd>
+
+                <dt class="col-sm-3">Farmer Email</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Farmer.FarmerEmail)</dd>
+
+                <dt class="col-sm-3">Farmer Number</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Farmer.FarmerNumber)</dd>
+
+                <dt class="col-sm-3">Product Name</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductName)</dd>
+
+                <dt class="col-sm-3">Product Description</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductDescription)</dd>
+
+                <dt class="col-sm-3">Product Image</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductImg)</dd>
+
+                <dt class="col-sm-3">Product Price</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductPrice)</dd>
+            </dl>
+        </div>
+
+        <div class="action-links mt-4">
+            <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

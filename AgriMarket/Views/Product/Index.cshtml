@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Product>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Product List";
 }
 
 <h1 class="text-center my-4">Product List</h1>
@@ -49,34 +50,41 @@
     }
 </style>
 
-<table id="my-table" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.ProductName)</th>
-            <th>@Html.DisplayNameFor(model => model.FarmerName)</th>
-            <th>@Html.DisplayNameFor(model => model.FarmerNumber)</th>
-            <th>@Html.DisplayNameFor(model => model.ProductPrice)</th>
-            <th>@Html.DisplayNameFor(model => model.ProductImg)</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (!Model.Any())
+{
+    <p>No products found.</p>
+}
+else
+{
+    <table id="my-table" class="table table-striped table-bordered">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
-                <td>@Html.DisplayFor(modelItem => item.FarmerName)</td>
-                <td>@Html.DisplayFor(modelItem => item.FarmerNumber)</td>
-                <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
-                <td>
-                    <img src="@item.ProductImg" alt="@item.ProductDescription" class="img-fluid" style="width:100px;height:100px" />
-                </td>
-                <td>
-                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
-                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.ProductId">Details</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
-                </td>
+                <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                <th>@Html.DisplayNameFor(model => model.Farmer!.FarmerName)</th>
+                <th>@Html.DisplayNameFor(model => model.Farmer!.FarmerNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.ProductPrice)</th>
+                <th>@Html.DisplayNameFor(model => model.ProductImg)</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Farmer!.FarmerName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Farmer!.FarmerNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductPrice)</td>
+                    <td>
+                        <img src="@item.ProductImg" alt="@item.ProductDescription" class="img-fluid" style="width:100px;height:100px" />
+                    </td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.ProductId">Edit</a>
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.ProductId">Details</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ProductId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
