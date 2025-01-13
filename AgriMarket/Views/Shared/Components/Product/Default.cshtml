@@ -40,9 +40,13 @@
                         <h3>
                             <span>$</span>@item.ProductPrice
                         </h3>
-                        <a href="">
-                            Buy Now
-                        </a>
+                        <form asp-action="AddToCart" asp-controller="Cart" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" /> 
+                            <input type="hidden" name="productName" value="@item.ProductName" />
+                            <input type="hidden" name="price" value="@item.ProductPrice" />
+                            <input type="hidden" name="imageUrl" value="@item.ProductImg" />
+                            <button type="submit" class="btn btn-success">Add to Cart</button>
+                        </form>
                         <a asp-action="Details" asp-controller="Product" asp-route-id="@item.ProductId">
                             Details
                         </a>

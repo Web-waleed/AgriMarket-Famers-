@@ -57,12 +57,7 @@ namespace AgriMarket.Controllers
 
                 
                 var farmer = _context.Farmers.FirstOrDefault(f => f.FarmerEmail == farmerEmail);
-                if (farmer == null)
-                {
-                    return Unauthorized("Farmer not found for the logged-in user.");
-                }
 
-               
                 product.FarmerId = farmer.FarmerId;
 
                 if (product.ImageFile != null && product.ImageFile.Length > 0)
@@ -118,10 +113,7 @@ namespace AgriMarket.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var organization = await _context.Products.FindAsync(id);
-            if (organization == null)
-            {
-                return NotFound();
-            }
+            
             return View(organization);
         }
 
@@ -139,10 +131,7 @@ namespace AgriMarket.Controllers
 
             
             var farmer = _context.Farmers.FirstOrDefault(f => f.FarmerEmail == farmerEmail);
-            if (farmer == null)
-            {
-                return Unauthorized("Farmer not found for the logged-in user.");
-            }
+           
 
             
             product.FarmerId = farmer.FarmerId;
@@ -191,7 +180,7 @@ namespace AgriMarket.Controllers
             return View(product);
         }
 
-        // GET: Organizations/Delete/5
+       
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _context.Products.FindAsync(id);
@@ -202,7 +191,7 @@ namespace AgriMarket.Controllers
             return View(product);
         }
 
-        // POST: Organizations/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

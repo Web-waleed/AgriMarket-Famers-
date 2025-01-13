@@ -12,8 +12,10 @@ namespace AgriMarket.Data
         public DbSet<FeedBack> feedBacks { get; set; }
         public DbSet<Product> Products { get; set; }
        public DbSet<Farmer>? Farmers { get; set; }
-       
+       public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Slider> sliders { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<ProductItem>productItems { get; set; }
         
         
     }

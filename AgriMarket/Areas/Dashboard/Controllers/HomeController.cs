@@ -1,7 +1,9 @@
 ﻿using AgriMarket.Data;
 using AgriMarket.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace AgriMarket.Areas.Dashboard.Controllers
 {
@@ -9,12 +11,21 @@ namespace AgriMarket.Areas.Dashboard.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _Context;
-        public HomeController(AppDbContext Context)
+        private UserManager<IdentityUser> _UserManager;
+        private RoleManager<IdentityRole> _RoleManager;
+        public HomeController(AppDbContext Context, UserManager<IdentityUser> UserManager , RoleManager<IdentityRole> RoleManager)
         {
             _Context = Context;
+            _UserManager= UserManager;
+            _RoleManager= RoleManager;
         }
         public IActionResult Index()
         {
+            ViewBag.TotalProduct= _Context.Products.Count();
+            ViewBag.TotalUser= _Context.Users.Count();
+            ViewBag.TotalFeedback=_Context.contactIUs.Count();
+            ViewBag.TotalSales=_Context.productItems.Sum(p=>p.Quantity*p.Price);
+            ViewBag.TotalFarmers = _Context.UserRoles.Where(f => f.RoleId == "69e6f5da-e45d-4edf-b9d0-7855673d4e18") .Count();
             return View();
         }
         public IActionResult SubmitProduct()

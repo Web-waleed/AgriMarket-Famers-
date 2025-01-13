@@ -44,7 +44,7 @@
 
 <body>
     <div class="hero_area ">
-        <!-- header section strats -->
+        <!-- header section starts -->
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
@@ -53,24 +53,27 @@
                     </a>
                     <div class="" id="">
                         <div class="User_option">
+                            <a style="padding-top:10px;" asp-action="Index" asp-controller="Cart" class="cart-icon">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="cart-count">@ViewBag.CartItemCount</span> <!-- يمكنك تحديث العدد ديناميكيًا -->
+                            </a>
+                            <div style="
+    padding-right: 5px;
+    padding-top: 10px;
+    padding-left: 5px;">
+                                |
+                            </div>
                             <form class="form-inline my-2  mb-3 mb-lg-0">
                                 @User.Identity!.Name
                             </form>
+
                         </div>
-
-
 
                         <div class="custom_menu-btn">
                             <button onclick="openNav()">
-                                <span class="s-1">
-
-                                </span>
-                                <span class="s-2">
-
-                                </span>
-                                <span class="s-3">
-
-                                </span>
+                                <span class="s-1"></span>
+                                <span class="s-2"></span>
+                                <span class="s-3"></span>
                             </button>
                         </div>
                         <div id="myNav" class="overlay">
@@ -81,13 +84,19 @@
                                 {
                                     if (User.IsInRole("Admin"))
                                     {
-                                        <a asp-action="Index" asp-controller="Home" asp-area="Dashboard"><i class="fa-solid fa-user-tie"> Admin</i></a>
+                                        <a asp-action="Index" asp-controller="Home" asp-area="Dashboard">
+                                            <i class="fa-solid fa-user-tie"> Admin</i>
+                                        </a>
 
-                                        <a asp-action="RolesList" asp-controller="Account"><i class="fa-solid fa-screwdriver-wrench"> Role List</i></a>
+                                        <a asp-action="RolesList" asp-controller="Account">
+                                            <i class="fa-solid fa-screwdriver-wrench"> Role List</i>
+                                        </a>
                                     }
                                     if (User.IsInRole("Farmer") || User.IsInRole("Admin"))
                                     {
-                                        <a asp-action="Index" asp-controller="Product"><i class="fa-solid fa-sitemap">Add Product</i> </a>
+                                        <a asp-action="Index" asp-controller="Product">
+                                            <i class="fa-solid fa-sitemap">Add Product</i>
+                                        </a>
                                     }
 
                                     <a asp-action="Logout" asp-controller="Account">SignOut | @User.Identity!.Name</a>
@@ -96,8 +105,6 @@
                                 {
                                     <a asp-action="Login" asp-controller="Account">Login</a>
                                 }
-
-
                             </div>
                         </div>
                     </div>

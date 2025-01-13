@@ -1,49 +1,63 @@
-using System.Diagnostics;
-using AgriMarket.Data;
+﻿using AgriMarket.Data;
 using AgriMarket.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
-namespace AgriMarket.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly AppDbContext _context;
+    private readonly ILogger<HomeController> _logger;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    public HomeController(ILogger<HomeController> logger, AppDbContext context, IHttpContextAccessor httpContextAccessor)
     {
-        public readonly AppDbContext _context;
+        _logger = logger;
+        _context = context;
+        _httpContextAccessor = httpContextAccessor;
+    }
 
-        private readonly ILogger<HomeController> _logger;
+    private string GetUserId()
+    {
+        // يمكنك استخدام نظام المصادقة الخاص بك للحصول على معرف المستخدم
+        return _httpContextAccessor.HttpContext.User.Identity.Name; // أو أي طريقة أخرى
+    }
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext context)
-        {
-            _logger = logger;
-            _context = context;
-        }
+    public async Task<IActionResult> Index()
+    {
+        ViewBag.CartItemCount = GetCartItemCount();
+        return View();
+    }
 
-        public async Task<IActionResult> Index()
+    public int GetCartItemCount()
+    {
+        var userId = GetUserId();
+        if (string.IsNullOrEmpty(userId))
         {
-            return View();
-            
-            
-        }
-        public IActionResult SubmitProduct()
-        {
-            return View();
-        }
-        [HttpPost]
-       
-        public IActionResult Cart()
-        {
-
-            return View();
-        }
-        public IActionResult Privacy()
-        {
-            return View();
+            return 0;
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        var cartItems = _context.CartItems.Where(c => c.UserId == userId).ToList();
+        return cartItems.Sum(item => item.Quantity);
+    }
+
+    public IActionResult SubmitProduct()
+    {
+        return View();
+    }
+
+    public IActionResult Cart()
+    {
+        return View();
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
