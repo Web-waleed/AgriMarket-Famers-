@@ -18,8 +18,8 @@ public class HomeController : Controller
 
     private string GetUserId()
     {
-        // يمكنك استخدام نظام المصادقة الخاص بك للحصول على معرف المستخدم
-        return _httpContextAccessor.HttpContext.User.Identity.Name; // أو أي طريقة أخرى
+       
+        return _httpContextAccessor.HttpContext.User.Identity.Name; 
     }
 
     public async Task<IActionResult> Index()
@@ -39,17 +39,6 @@ public class HomeController : Controller
         var cartItems = _context.CartItems.Where(c => c.UserId == userId).ToList();
         return cartItems.Sum(item => item.Quantity);
     }
-
-    public IActionResult SubmitProduct()
-    {
-        return View();
-    }
-
-    public IActionResult Cart()
-    {
-        return View();
-    }
-
     public IActionResult Privacy()
     {
         return View();

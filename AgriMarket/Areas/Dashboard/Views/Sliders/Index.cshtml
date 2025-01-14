@@ -23,6 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Sliderimg)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </th>
 
             <th></th>
         </tr>
@@ -38,7 +41,9 @@
                 <td>
                     <img src="@item.Sliderimg" alt="@item.SliderDescription" class="img-fluid" style="width:100px;height:100px" />
                 </td>
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
                 <td>
                     <a class="btn btn-warning" asp-action="Edit" method="post" asp-route-id="@item.SliderID">Edit</a> |
                     <a class="btn btn-info" asp-action="Details" asp-route-id="@item.SliderID">Details</a> |

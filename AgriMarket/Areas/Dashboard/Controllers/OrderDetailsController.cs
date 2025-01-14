@@ -20,7 +20,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
         public IActionResult Orders()
         {
             var orders = _context.OrderProducts
-                .Include(o => o.Products)
+                .Include(o => o.Products).OrderByDescending(o => o.OrderDate)
                 .Select(o => new OrderDetailViewModel
                 {
                     Id = o.Id,
@@ -31,7 +31,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                     OrderDate = o.OrderDate,
                     Products = o.Products.Select(p => new OrderDetailViewModel.Product
                     {
-                        Id = p.Id,  // Assuming Id is the primary key for the Product
+                        Id = p.Id,  
                         ProductName = p.ProductName,
                         Price = p.Price,
                         Quantity = p.Quantity
@@ -45,7 +45,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
         public IActionResult DeleteOrder(int orderId)
         {
             var order = _context.OrderProducts
-                .Include(o => o.Products) // Include related products to ensure they are loaded
+                .Include(o => o.Products) 
                 .FirstOrDefault(o => o.Id == orderId);
 
             if (order != null)

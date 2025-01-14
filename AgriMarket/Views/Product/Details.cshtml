@@ -76,9 +76,20 @@
         <div class="action-links mt-4">
             @if (User.IsInRole("Farmer") || User.IsInRole("Admin"))
             {
-                <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary">Edit</a>
+                <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary">Edit</a> 
             }
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            @if(User.IsInRole("User")){
+                <div style="margin-bottom:20px;">
+               <form asp-action="AddToCart" asp-controller="Cart" method="post">
+                <input type="hidden" name="productId" value="@Model.ProductId" />
+                <input type="hidden" name="productName" value="@Model.ProductName" />
+                <input type="hidden" name="price" value="@Model.ProductPrice" />
+                <input type="hidden" name="imageUrl" value="@Model.ProductImg" />
+                <button type="submit" class="btn btn-success">Add to Cart</button>
+               </form>
+                </div>
+            }
+            <a asp-action="Index">Back to List</a>
            
         </div>
     </div>

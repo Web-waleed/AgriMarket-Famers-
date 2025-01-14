@@ -1,5 +1,6 @@
 ﻿using AgriMarket.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Models.ViewComponents
 {
@@ -12,7 +13,11 @@ namespace AgriMarket.Models.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            return View(_context.sliders.ToList());
+            var sliders = _context.sliders
+               .Include(s => s.Product) 
+               .ToList();
+
+            return View(sliders);
         }
     }
 }

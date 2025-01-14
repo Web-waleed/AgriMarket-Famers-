@@ -306,6 +306,9 @@ namespace AgriMarket.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SliderDescription")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -324,6 +327,8 @@ namespace AgriMarket.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.HasKey("SliderID");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("sliders");
                 });
@@ -546,6 +551,15 @@ namespace AgriMarket.Migrations
                         .IsRequired();
 
                     b.Navigation("OrderProduct");
+                });
+
+            modelBuilder.Entity("AgriMarket.Models.Slider", b =>
+                {
+                    b.HasOne("AgriMarket.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

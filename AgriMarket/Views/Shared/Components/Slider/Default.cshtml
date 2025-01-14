@@ -29,7 +29,7 @@
                                         @item.SliderDescription
                                         </p>
                                     <div class="btn-box">
-                                        <a href="" class="btn-1">
+                                        <a asp-action="Details" asp-controller="Product" asp-route-id="@item.ProductId" class="btn-1">
                                             @item.Button
                                         </a>
                                         <a href="" class="btn-2">
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="img-box">
-                                    <img src="@item.Sliderimg" alt="@item.SliderDescription">
+                                    <img style="height:400px;" src="@item.Sliderimg" alt="@item.SliderDescription">
                                 </div>
                             </div>
                         </div>

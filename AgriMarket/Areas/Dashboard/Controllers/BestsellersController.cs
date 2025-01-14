@@ -1,11 +1,13 @@
 ﻿using AgriMarket.Data;
 using AgriMarket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgriMarket.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
+    [Authorize(Roles = "Admin")]
     public class BestsellersController : Controller
     {
         private readonly AppDbContext _context;

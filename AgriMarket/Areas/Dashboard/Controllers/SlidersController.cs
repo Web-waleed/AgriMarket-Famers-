@@ -1,5 +1,6 @@
 ﻿using AgriMarket.Data;
 using AgriMarket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AgriMarket.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
+    [Authorize(Roles = "Admin")]
     public class SlidersController : Controller
     {
         private readonly AppDbContext _context;
@@ -18,7 +20,10 @@ namespace AgriMarket.Areas.Dashboard.Controllers
         // GET: Dashboard/Sliders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.sliders.ToListAsync());
+            var sliders = _context.sliders
+        .Include(s => s.Product) 
+        .ToList();
+            return View(sliders);
         }
 
         // GET: Dashboard/Sliders/Details/5
@@ -29,7 +34,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                 return NotFound();
             }
 
-            var slider = await _context.sliders
+            var slider = await _context.sliders.Include(s => s.Product)
                 .FirstOrDefaultAsync(m => m.SliderID == id);
             if (slider == null)
             {
@@ -42,7 +47,11 @@ namespace AgriMarket.Areas.Dashboard.Controllers
         // GET: Dashboard/Sliders/Create
         public IActionResult Create()
         {
+           
+            ViewBag.GetProducts = new SelectList(_context.Products, "ProductId", "ProductName");
+           
             return View();
+           
         }
 
         // POST: Dashboard/Sliders/Create
@@ -79,7 +88,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                     // Save to the database
                     _context.sliders.Add(Slider);
                     await _context.SaveChangesAsync();
-
+                    ViewBag.GetProducts = new SelectList(_context.Products, "ProductId", "ProductName" );
                     return RedirectToAction(nameof(Index));
                 }
 
@@ -97,12 +106,12 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                 return NotFound();
             }
 
-            var slider = await _context.sliders.FindAsync(id);
+            var slider = await _context.sliders.Include(s => s.Product).FirstOrDefaultAsync(s => s.SliderID == id);
             if (slider == null)
             {
                 return NotFound();
             }
-            
+            ViewBag.GetProducts = new SelectList(_context.Products, "ProductId", "ProductName");
             return View(slider);
         }
 
@@ -123,7 +132,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                 try
                 {
                     // Retrieve the existing product from the database
-                    var existingSlider = await _context.sliders.AsNoTracking().FirstOrDefaultAsync(p => p.SliderID == id);
+                    var existingSlider = await _context.sliders.Include(s => s.Product) .AsNoTracking().FirstOrDefaultAsync(p => p.SliderID == id);
                     if (existingSlider == null)
                     {
                         return NotFound();
@@ -186,7 +195,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                 return NotFound();
             }
 
-            var slider = await _context.sliders
+            var slider = await _context.sliders.Include(s => s.Product)
                 .FirstOrDefaultAsync(m => m.SliderID == id);
             if (slider == null)
             {
@@ -213,7 +222,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
 
         private bool SliderExists(int id)
         {
-            return _context.sliders.Any(e => e.SliderID == id);
+            return _context.sliders.Include(s => s.Product).Any(e => e.SliderID == id);
         }
     }
 }

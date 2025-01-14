@@ -29,5 +29,9 @@ namespace AgriMarket.Models
         [NotMapped]
         public IFormFile? ImageFile { get; set; } 
         public string? Active { get; set; }
+
+        [ForeignKey("ProductId")]
+        public int? ProductId { get; set; } 
+        public Product? Product { get; set; }
     }
 }
