@@ -45,15 +45,15 @@ namespace AgriMarket.Areas.Dashboard.Controllers
             return View();
         }
 
-        // POST: Dashboard/Feedbacks/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create(FeedBack feedback)
         {
+            
             if (ModelState.IsValid)
             {
+                feedback.Active ??= "true";
                 _context.Add(feedback);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -61,7 +61,7 @@ namespace AgriMarket.Areas.Dashboard.Controllers
             return View(feedback);
         }
 
-        // GET: Dashboard/Feedbacks/Edit/5
+        // GET: Dashboard/Feedbacks/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

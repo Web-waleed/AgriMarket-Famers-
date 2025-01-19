@@ -26,5 +26,7 @@ namespace AgriMarket.Models
 
         [DataType(DataType.DateTime)]
         public DateTime DateSubmitted { get; set; } = DateTime.UtcNow;
+
+        public string? Status { get; set; }
     }
 }

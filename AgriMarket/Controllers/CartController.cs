@@ -19,7 +19,7 @@ public class CartController : Controller
     public IActionResult Index()
     {
          
-        var userId = _httpContextAccessor.HttpContext.User.Identity.Name;
+        var userId = _httpContextAccessor.HttpContext?.User.Identity.Name;
         var cartItems = _context.CartItems.Where(c => c.UserId == userId).ToList();
         ViewBag.CartItemCount = cartItems.Sum(item => item.ProductId);
         return View(cartItems);
@@ -28,7 +28,7 @@ public class CartController : Controller
     [HttpPost]
     public IActionResult AddToCart(int productId, string productName, decimal price, string imageUrl)
     {
-        var userId = _httpContextAccessor.HttpContext.User.Identity.Name;
+        var userId = _httpContextAccessor.HttpContext?.User.Identity.Name;
         var existingItem = _context.CartItems.FirstOrDefault(c => c.ProductId == productId && c.UserId == userId);
 
         if (existingItem != null)
@@ -55,7 +55,7 @@ public class CartController : Controller
     [HttpPost]
     public IActionResult RemoveFromCart(int productId)
     {
-        var userId = _httpContextAccessor.HttpContext.User.Identity.Name;
+        var userId = _httpContextAccessor.HttpContext?.User.Identity.Name;
         var itemToRemove = _context.CartItems.FirstOrDefault(c => c.ProductId == productId && c.UserId == userId);
 
         if (itemToRemove != null)
@@ -70,7 +70,7 @@ public class CartController : Controller
     [HttpPost]
     public IActionResult ClearCart()
     {
-        var userId = _httpContextAccessor.HttpContext.User.Identity.Name;
+        var userId = _httpContextAccessor.HttpContext?.User.Identity.Name;
         var cartItems = _context.CartItems.Where(c => c.UserId == userId).ToList();
 
         if (cartItems.Any())

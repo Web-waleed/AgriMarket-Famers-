@@ -26,12 +26,13 @@ namespace AgriMarket.Models
         [Required(ErrorMessage = "Product price is required.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Product price must be greater than 0.")]
         public decimal ProductPrice { get; set; }
-        // Product status (Pending, Accepted, Rejected)
+        
         public FarmerProductStatus Status { get; set; } = FarmerProductStatus.Pending;
-        // Foreign key to associate the product with a farmer (as a string)
+        public int SalesCount { get; set; }
+        
         [ForeignKey("FarmerId")]
         public int FarmerId { get; set; }
-        public Farmer? Farmer { get; set; } // Navigation property to the Farmer
+        public Farmer? Farmer { get; set; } 
     }
     public enum FarmerProductStatus
     {

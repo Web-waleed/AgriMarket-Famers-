@@ -20,7 +20,8 @@ namespace AgriMarket.Areas.Dashboard.Controllers
         public IActionResult Orders()
         {
             var orders = _context.OrderProducts
-                .Include(o => o.Products).OrderByDescending(o => o.OrderDate)
+                .Include(o => o.Products)
+                .OrderByDescending(o => o.OrderDate)
                 .Select(o => new OrderDetailViewModel
                 {
                     Id = o.Id,
@@ -29,9 +30,10 @@ namespace AgriMarket.Areas.Dashboard.Controllers
                     PhoneNumber = o.PhoneNumber,
                     Address = o.Address,
                     OrderDate = o.OrderDate,
+                    Status = o.Status, 
                     Products = o.Products.Select(p => new OrderDetailViewModel.Product
                     {
-                        Id = p.Id,  
+                        Id = p.Id,
                         ProductName = p.ProductName,
                         Price = p.Price,
                         Quantity = p.Quantity
@@ -40,7 +42,18 @@ namespace AgriMarket.Areas.Dashboard.Controllers
 
             return View(orders);
         }
+        [HttpPost]
+        public IActionResult UpdateStatus(int orderId, string status)
+        {
+            var order = _context.OrderProducts.Find(orderId);
+            if (order != null)
+            {
+                order.Status = status;
+                _context.SaveChanges();
+            }
 
+            return RedirectToAction("Orders");
+        }
         [HttpPost]
         public IActionResult DeleteOrder(int orderId)
         {

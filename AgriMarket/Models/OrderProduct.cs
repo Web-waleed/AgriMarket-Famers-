@@ -20,6 +20,7 @@ namespace AgriMarket.Models
             public string PhoneNumber { get; set; }
             public string Address { get; set; }
             public string PaymentMethod { get; set; }
+            public string? Status { get; set; }
             public DateTime OrderDate { get; set; }
             public List<ProductItem> Products { get; set; } = new List<ProductItem>();
 

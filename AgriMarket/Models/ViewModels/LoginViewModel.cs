@@ -5,7 +5,7 @@ namespace AgriMarket.Models.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Incorrect email address.")]
         public String? Email { get; set; }
         [DataType(DataType.Password)]
         [Required]

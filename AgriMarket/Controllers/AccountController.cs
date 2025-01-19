@@ -49,9 +49,9 @@ namespace AgriMarket.Controllers
                 };
                 var farmer = new Farmer
                 {
-                    FarmerEmail = model.Email, // Save the email from the RegisterViewModel
-                    FarmerName = model.Email, // You can use the email as the name or add a Name field to the RegisterViewModel
-                    FarmerNumber = model.PhoneNumber // Save the phone number if needed
+                    FarmerEmail = model.Email, 
+                    FarmerName = model.Email, 
+                    FarmerNumber = model.PhoneNumber 
                 };
                 context.Farmers.Add(farmer);
                 await context.SaveChangesAsync();
@@ -98,8 +98,8 @@ namespace AgriMarket.Controllers
         }
         public IActionResult UserStatistics()
         {
-            ViewBag.TotalUsers = userManager.Users.Count();  // Get the total number of users
-            return View();  // Update this to redirect to the appropriate view
+            ViewBag.TotalUsers = userManager.Users.Count();  
+            return View();  
         }
         #endregion
 

@@ -72,6 +72,13 @@
         .actions {
             min-width: 120px;
         }
+
+        .status-dropdown {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -81,12 +88,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Order ID</th>
+                    <th>Order Id</th>
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Address</th>
                     <th>Order Date</th>
+                    <th>Status</th>
                     <th>Products</th>
                     <th>Total Price</th>
                     <th class="actions">Actions</th>
@@ -102,13 +110,23 @@
                         <td>@order.PhoneNumber</td>
                         <td>@order.Address</td>
                         <td>@order.OrderDate.ToString("MM/dd/yyyy HH:mm")</td>
+                        <td>
+                            <form asp-action="UpdateStatus" method="post">
+                                <input type="hidden" name="orderId" value="@order.Id" />
+                                <select name="status" class="status-dropdown" onchange="this.form.submit()">
+                                    <option value="Pending" selected="@(order.Status == "Pending")">Pending</option>
+                                    <option value="completed" selected="@(order.Status == "completed")">completed</option>
+                                   
+                                </select>
+                            </form>
+                        </td>
                         <td class="product-details">
                             @foreach (var product in order.Products)
                             {
                                 <div>
-                                    @product.ProductName <br>
-                                    Quantity: @product.Quantity <br>
-                                    Price: @product.Price.ToString("C")
+                                    ProductName: @product.ProductName ,<br>
+                                    Quantity: @product.Quantity ,<br>
+                                    Price: @product.Price.ToString("C") ,
                                 </div>
                             }
                         </td>

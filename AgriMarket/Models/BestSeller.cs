@@ -23,8 +23,8 @@ namespace AgriMarket.Models
         public string ProductType { get; set; }
 
         [StringLength(255, ErrorMessage = "Image URL cannot exceed 255 characters.")]
-        public string? ProductImg { get; set; } // Changed to lowercase 'string' for consistency
+        public string? ProductImg { get; set; } 
         [NotMapped]
-        public IFormFile? ImageFile { get; set; } // For file uploads
+        public IFormFile? ImageFile { get; set; } 
     }
 }

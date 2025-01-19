@@ -16,6 +16,7 @@ public class ContactsController : Controller
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Index(ContactIUS contact)
     {
         if (ModelState.IsValid)
@@ -47,7 +48,18 @@ public class ContactsController : Controller
 
         return RedirectToAction(nameof(Messages));
     }
+    [HttpPost]
+    public IActionResult UpdateStatus(int Id, string status)
+    {
+        var contact = _context.contactIUs.Find(Id);
+        if (contact != null)
+        {
+            contact.Status = status;
+            _context.SaveChanges();
+        }
 
+        return RedirectToAction("Messages");
+    }
     [AllowAnonymous]
     public IActionResult Success()
     {

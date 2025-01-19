@@ -16,10 +16,9 @@ public class HomeController : Controller
         _httpContextAccessor = httpContextAccessor;
     }
 
-    private string GetUserId()
+    private string? GetUserId()
     {
-       
-        return _httpContextAccessor.HttpContext.User.Identity.Name; 
+        return _httpContextAccessor.HttpContext?.User?.Identity?.Name;
     }
 
     public async Task<IActionResult> Index()
@@ -37,7 +36,7 @@ public class HomeController : Controller
         }
 
         var cartItems = _context.CartItems.Where(c => c.UserId == userId).ToList();
-        return cartItems.Sum(item => item.Quantity);
+        return cartItems?.Sum(item => item.Quantity) ?? 0;
     }
     public IActionResult Privacy()
     {
