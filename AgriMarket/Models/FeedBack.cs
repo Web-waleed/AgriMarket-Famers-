@@ -11,11 +11,11 @@ namespace AgriMarket.Models
         public  string Name { get; set; } 
 
         [Required(ErrorMessage = "Review is required.")]
-        [StringLength(500, ErrorMessage = "Review cannot exceed 500 characters.")]
+        [StringLength(2000, ErrorMessage = "Review cannot exceed 500 characters.")]
         public  string Review { get; set; } 
 
-        [DataType(DataType.DateTime)]
-        public DateTime SubmissionDate { get; set; }
+        
+        public string? SubmissionDate { get; set; }
 
         
         public string? Active { get; set; } = "true"; 
